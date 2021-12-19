@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import logo from '../../../public/images/logo.svg'; 
+import { SignInButton } from '../SignInButton';
+
 import styles from './styles.module.scss';
 // O Next permite a utilziação de um componente Image para otimização de imagens
 /* 
@@ -16,6 +18,8 @@ export function Header() {
           <a className={styles.active}>Home</a>
           <a>Post</a>
         </nav>
+
+        <SignInButton />
       </div>
     </header>
   );
