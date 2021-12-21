@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Head  from 'next/head';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import GirlCoding from '../../public/images/avatar.svg';
 
@@ -41,7 +41,21 @@ export default function Home({ product }: HomeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
+
+  /* Formas de se fazer chamadas a API:
+    Client-side
+      - Sem indexação
+      - Carregamento depois de servir a página
+    Server-side
+      - Com indexação
+      - Carregamento antes de servir a página
+      - Server-Side-Rendering (getServerProps) - Dinâmico - Realiza o processo repetidas vezes;
+    Static Site Generátion
+      - Com indexação
+      - Carregamento antes de servir a página
+      - staticSideProps (getStaticProps): Statico para todos os clientes - Possui o revalidate;
+  */
   const price = await stripe.prices.retrieve('price_1K8ZjVCKhUtM2Q1nr2Akzobi', {
     expand: ['product']
   });
@@ -57,6 +71,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       product
-    }
+    },
+    revalidate: 60 * 60 * 24 // 24 hours
   }
 }
