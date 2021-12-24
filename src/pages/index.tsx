@@ -8,7 +8,6 @@ import { SubscribeButton } from '../components/SubscribeButton';
 import { stripe } from '../services/stripe';
 
 import styles from './home.module.scss'
-import { privateDecrypt } from 'crypto';
 
 interface HomeProps {
   product: {
@@ -34,7 +33,7 @@ export default function Home({ product }: HomeProps) {
           </p>
           <SubscribeButton priceId={product.priceId}/>
         </section>
-
+        
         <Image src={GirlCoding} alt="Girl coding" />
       </main>
     </>
